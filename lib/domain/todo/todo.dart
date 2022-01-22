@@ -11,6 +11,7 @@ class ToDo with _$ToDo {
     @JsonKey(name: 'todo_id') required int id,
     @JsonKey(name: 'todo_title') required String name,
     @JsonKey(name: 'todo_is_done') required bool isDone,
+    @JsonKey(name: 'todo_list_id') required int todoListId,
   }) = _ToDo;
 
   factory ToDo.fromJson(Map<String, dynamic> json) => _$ToDoFromJson(json);

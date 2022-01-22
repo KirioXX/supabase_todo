@@ -25,11 +25,13 @@ class _$ToDoTearOff {
   _ToDo call(
       {@JsonKey(name: 'todo_id') required int id,
       @JsonKey(name: 'todo_title') required String name,
-      @JsonKey(name: 'todo_is_done') required bool isDone}) {
+      @JsonKey(name: 'todo_is_done') required bool isDone,
+      @JsonKey(name: 'todo_list_id') required int todoListId}) {
     return _ToDo(
       id: id,
       name: name,
       isDone: isDone,
+      todoListId: todoListId,
     );
   }
 
@@ -49,6 +51,8 @@ mixin _$ToDo {
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'todo_is_done')
   bool get isDone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'todo_list_id')
+  int get todoListId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,7 +66,8 @@ abstract class $ToDoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'todo_id') int id,
       @JsonKey(name: 'todo_title') String name,
-      @JsonKey(name: 'todo_is_done') bool isDone});
+      @JsonKey(name: 'todo_is_done') bool isDone,
+      @JsonKey(name: 'todo_list_id') int todoListId});
 }
 
 /// @nodoc
@@ -78,6 +83,7 @@ class _$ToDoCopyWithImpl<$Res> implements $ToDoCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? isDone = freezed,
+    Object? todoListId = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -92,6 +98,10 @@ class _$ToDoCopyWithImpl<$Res> implements $ToDoCopyWith<$Res> {
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
               as bool,
+      todoListId: todoListId == freezed
+          ? _value.todoListId
+          : todoListId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -104,7 +114,8 @@ abstract class _$ToDoCopyWith<$Res> implements $ToDoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'todo_id') int id,
       @JsonKey(name: 'todo_title') String name,
-      @JsonKey(name: 'todo_is_done') bool isDone});
+      @JsonKey(name: 'todo_is_done') bool isDone,
+      @JsonKey(name: 'todo_list_id') int todoListId});
 }
 
 /// @nodoc
@@ -121,6 +132,7 @@ class __$ToDoCopyWithImpl<$Res> extends _$ToDoCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? isDone = freezed,
+    Object? todoListId = freezed,
   }) {
     return _then(_ToDo(
       id: id == freezed
@@ -135,6 +147,10 @@ class __$ToDoCopyWithImpl<$Res> extends _$ToDoCopyWithImpl<$Res>
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
               as bool,
+      todoListId: todoListId == freezed
+          ? _value.todoListId
+          : todoListId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -145,7 +161,8 @@ class _$_ToDo implements _ToDo {
   const _$_ToDo(
       {@JsonKey(name: 'todo_id') required this.id,
       @JsonKey(name: 'todo_title') required this.name,
-      @JsonKey(name: 'todo_is_done') required this.isDone});
+      @JsonKey(name: 'todo_is_done') required this.isDone,
+      @JsonKey(name: 'todo_list_id') required this.todoListId});
 
   factory _$_ToDo.fromJson(Map<String, dynamic> json) => _$$_ToDoFromJson(json);
 
@@ -158,10 +175,13 @@ class _$_ToDo implements _ToDo {
   @override
   @JsonKey(name: 'todo_is_done')
   final bool isDone;
+  @override
+  @JsonKey(name: 'todo_list_id')
+  final int todoListId;
 
   @override
   String toString() {
-    return 'ToDo(id: $id, name: $name, isDone: $isDone)';
+    return 'ToDo(id: $id, name: $name, isDone: $isDone, todoListId: $todoListId)';
   }
 
   @override
@@ -171,7 +191,9 @@ class _$_ToDo implements _ToDo {
             other is _ToDo &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.isDone, isDone));
+            const DeepCollectionEquality().equals(other.isDone, isDone) &&
+            const DeepCollectionEquality()
+                .equals(other.todoListId, todoListId));
   }
 
   @override
@@ -179,7 +201,8 @@ class _$_ToDo implements _ToDo {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(isDone));
+      const DeepCollectionEquality().hash(isDone),
+      const DeepCollectionEquality().hash(todoListId));
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +219,8 @@ abstract class _ToDo implements ToDo {
   const factory _ToDo(
       {@JsonKey(name: 'todo_id') required int id,
       @JsonKey(name: 'todo_title') required String name,
-      @JsonKey(name: 'todo_is_done') required bool isDone}) = _$_ToDo;
+      @JsonKey(name: 'todo_is_done') required bool isDone,
+      @JsonKey(name: 'todo_list_id') required int todoListId}) = _$_ToDo;
 
   factory _ToDo.fromJson(Map<String, dynamic> json) = _$_ToDo.fromJson;
 
@@ -209,6 +233,9 @@ abstract class _ToDo implements ToDo {
   @override
   @JsonKey(name: 'todo_is_done')
   bool get isDone;
+  @override
+  @JsonKey(name: 'todo_list_id')
+  int get todoListId;
   @override
   @JsonKey(ignore: true)
   _$ToDoCopyWith<_ToDo> get copyWith => throw _privateConstructorUsedError;

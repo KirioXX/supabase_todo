@@ -22,15 +22,24 @@ class _$ToDoStateTearOff {
     return const _Initial();
   }
 
-  _Updated updated(List<ToDo> todos) {
+  _ListsReceved listsReceved(List<ToDoList> todoLists) {
+    return _ListsReceved(
+      todoLists,
+    );
+  }
+
+  _Updated updated(List<ToDoList>? todoLists, List<ToDo> todos) {
     return _Updated(
+      todoLists,
       todos,
     );
   }
 
-  _Error error(String? message, [List<ToDo>? todos]) {
+  _Error error(String? message,
+      [List<ToDoList>? todoLists, List<ToDo>? todos]) {
     return _Error(
       message,
+      todoLists,
       todos,
     );
   }
@@ -44,28 +53,39 @@ mixin _$ToDoState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ToDo> todos) updated,
-    required TResult Function(String? message, List<ToDo>? todos) error,
+    required TResult Function(List<ToDoList> todoLists) listsReceved,
+    required TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)
+        updated,
+    required TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ToDo> todos)? updated,
-    TResult Function(String? message, List<ToDo>? todos)? error,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ToDo> todos)? updated,
-    TResult Function(String? message, List<ToDo>? todos)? error,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ListsReceved value) listsReceved,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) =>
@@ -73,6 +93,7 @@ mixin _$ToDoState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
     TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) =>
@@ -80,6 +101,7 @@ mixin _$ToDoState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
     TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -141,8 +163,12 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ToDo> todos) updated,
-    required TResult Function(String? message, List<ToDo>? todos) error,
+    required TResult Function(List<ToDoList> todoLists) listsReceved,
+    required TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)
+        updated,
+    required TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)
+        error,
   }) {
     return initial();
   }
@@ -151,8 +177,11 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ToDo> todos)? updated,
-    TResult Function(String? message, List<ToDo>? todos)? error,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
   }) {
     return initial?.call();
   }
@@ -161,8 +190,11 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ToDo> todos)? updated,
-    TResult Function(String? message, List<ToDo>? todos)? error,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -175,6 +207,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ListsReceved value) listsReceved,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) {
@@ -185,6 +218,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
     TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) {
@@ -195,6 +229,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
     TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -211,10 +246,162 @@ abstract class _Initial implements ToDoState {
 }
 
 /// @nodoc
+abstract class _$ListsRecevedCopyWith<$Res> {
+  factory _$ListsRecevedCopyWith(
+          _ListsReceved value, $Res Function(_ListsReceved) then) =
+      __$ListsRecevedCopyWithImpl<$Res>;
+  $Res call({List<ToDoList> todoLists});
+}
+
+/// @nodoc
+class __$ListsRecevedCopyWithImpl<$Res> extends _$ToDoStateCopyWithImpl<$Res>
+    implements _$ListsRecevedCopyWith<$Res> {
+  __$ListsRecevedCopyWithImpl(
+      _ListsReceved _value, $Res Function(_ListsReceved) _then)
+      : super(_value, (v) => _then(v as _ListsReceved));
+
+  @override
+  _ListsReceved get _value => super._value as _ListsReceved;
+
+  @override
+  $Res call({
+    Object? todoLists = freezed,
+  }) {
+    return _then(_ListsReceved(
+      todoLists == freezed
+          ? _value.todoLists
+          : todoLists // ignore: cast_nullable_to_non_nullable
+              as List<ToDoList>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ListsReceved implements _ListsReceved {
+  const _$_ListsReceved(this.todoLists);
+
+  @override
+  final List<ToDoList> todoLists;
+
+  @override
+  String toString() {
+    return 'ToDoState.listsReceved(todoLists: $todoLists)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ListsReceved &&
+            const DeepCollectionEquality().equals(other.todoLists, todoLists));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(todoLists));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ListsRecevedCopyWith<_ListsReceved> get copyWith =>
+      __$ListsRecevedCopyWithImpl<_ListsReceved>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<ToDoList> todoLists) listsReceved,
+    required TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)
+        updated,
+    required TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)
+        error,
+  }) {
+    return listsReceved(todoLists);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
+  }) {
+    return listsReceved?.call(todoLists);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
+    required TResult orElse(),
+  }) {
+    if (listsReceved != null) {
+      return listsReceved(todoLists);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ListsReceved value) listsReceved,
+    required TResult Function(_Updated value) updated,
+    required TResult Function(_Error value) error,
+  }) {
+    return listsReceved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
+    TResult Function(_Updated value)? updated,
+    TResult Function(_Error value)? error,
+  }) {
+    return listsReceved?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
+    TResult Function(_Updated value)? updated,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (listsReceved != null) {
+      return listsReceved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ListsReceved implements ToDoState {
+  const factory _ListsReceved(List<ToDoList> todoLists) = _$_ListsReceved;
+
+  List<ToDoList> get todoLists;
+  @JsonKey(ignore: true)
+  _$ListsRecevedCopyWith<_ListsReceved> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$UpdatedCopyWith<$Res> {
   factory _$UpdatedCopyWith(_Updated value, $Res Function(_Updated) then) =
       __$UpdatedCopyWithImpl<$Res>;
-  $Res call({List<ToDo> todos});
+  $Res call({List<ToDoList>? todoLists, List<ToDo> todos});
 }
 
 /// @nodoc
@@ -228,9 +415,14 @@ class __$UpdatedCopyWithImpl<$Res> extends _$ToDoStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? todoLists = freezed,
     Object? todos = freezed,
   }) {
     return _then(_Updated(
+      todoLists == freezed
+          ? _value.todoLists
+          : todoLists // ignore: cast_nullable_to_non_nullable
+              as List<ToDoList>?,
       todos == freezed
           ? _value.todos
           : todos // ignore: cast_nullable_to_non_nullable
@@ -242,14 +434,16 @@ class __$UpdatedCopyWithImpl<$Res> extends _$ToDoStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Updated implements _Updated {
-  const _$_Updated(this.todos);
+  const _$_Updated(this.todoLists, this.todos);
 
+  @override
+  final List<ToDoList>? todoLists;
   @override
   final List<ToDo> todos;
 
   @override
   String toString() {
-    return 'ToDoState.updated(todos: $todos)';
+    return 'ToDoState.updated(todoLists: $todoLists, todos: $todos)';
   }
 
   @override
@@ -257,12 +451,15 @@ class _$_Updated implements _Updated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Updated &&
+            const DeepCollectionEquality().equals(other.todoLists, todoLists) &&
             const DeepCollectionEquality().equals(other.todos, todos));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(todos));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(todoLists),
+      const DeepCollectionEquality().hash(todos));
 
   @JsonKey(ignore: true)
   @override
@@ -273,32 +470,42 @@ class _$_Updated implements _Updated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ToDo> todos) updated,
-    required TResult Function(String? message, List<ToDo>? todos) error,
+    required TResult Function(List<ToDoList> todoLists) listsReceved,
+    required TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)
+        updated,
+    required TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)
+        error,
   }) {
-    return updated(todos);
+    return updated(todoLists, todos);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ToDo> todos)? updated,
-    TResult Function(String? message, List<ToDo>? todos)? error,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
   }) {
-    return updated?.call(todos);
+    return updated?.call(todoLists, todos);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ToDo> todos)? updated,
-    TResult Function(String? message, List<ToDo>? todos)? error,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
     required TResult orElse(),
   }) {
     if (updated != null) {
-      return updated(todos);
+      return updated(todoLists, todos);
     }
     return orElse();
   }
@@ -307,6 +514,7 @@ class _$_Updated implements _Updated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ListsReceved value) listsReceved,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) {
@@ -317,6 +525,7 @@ class _$_Updated implements _Updated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
     TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) {
@@ -327,6 +536,7 @@ class _$_Updated implements _Updated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
     TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -339,8 +549,10 @@ class _$_Updated implements _Updated {
 }
 
 abstract class _Updated implements ToDoState {
-  const factory _Updated(List<ToDo> todos) = _$_Updated;
+  const factory _Updated(List<ToDoList>? todoLists, List<ToDo> todos) =
+      _$_Updated;
 
+  List<ToDoList>? get todoLists;
   List<ToDo> get todos;
   @JsonKey(ignore: true)
   _$UpdatedCopyWith<_Updated> get copyWith =>
@@ -351,7 +563,7 @@ abstract class _Updated implements ToDoState {
 abstract class _$ErrorCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
       __$ErrorCopyWithImpl<$Res>;
-  $Res call({String? message, List<ToDo>? todos});
+  $Res call({String? message, List<ToDoList>? todoLists, List<ToDo>? todos});
 }
 
 /// @nodoc
@@ -366,6 +578,7 @@ class __$ErrorCopyWithImpl<$Res> extends _$ToDoStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = freezed,
+    Object? todoLists = freezed,
     Object? todos = freezed,
   }) {
     return _then(_Error(
@@ -373,6 +586,10 @@ class __$ErrorCopyWithImpl<$Res> extends _$ToDoStateCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      todoLists == freezed
+          ? _value.todoLists
+          : todoLists // ignore: cast_nullable_to_non_nullable
+              as List<ToDoList>?,
       todos == freezed
           ? _value.todos
           : todos // ignore: cast_nullable_to_non_nullable
@@ -384,16 +601,18 @@ class __$ErrorCopyWithImpl<$Res> extends _$ToDoStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error implements _Error {
-  const _$_Error(this.message, [this.todos]);
+  const _$_Error(this.message, [this.todoLists, this.todos]);
 
   @override
   final String? message;
+  @override
+  final List<ToDoList>? todoLists;
   @override
   final List<ToDo>? todos;
 
   @override
   String toString() {
-    return 'ToDoState.error(message: $message, todos: $todos)';
+    return 'ToDoState.error(message: $message, todoLists: $todoLists, todos: $todos)';
   }
 
   @override
@@ -402,6 +621,7 @@ class _$_Error implements _Error {
         (other.runtimeType == runtimeType &&
             other is _Error &&
             const DeepCollectionEquality().equals(other.message, message) &&
+            const DeepCollectionEquality().equals(other.todoLists, todoLists) &&
             const DeepCollectionEquality().equals(other.todos, todos));
   }
 
@@ -409,6 +629,7 @@ class _$_Error implements _Error {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(message),
+      const DeepCollectionEquality().hash(todoLists),
       const DeepCollectionEquality().hash(todos));
 
   @JsonKey(ignore: true)
@@ -420,32 +641,42 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ToDo> todos) updated,
-    required TResult Function(String? message, List<ToDo>? todos) error,
+    required TResult Function(List<ToDoList> todoLists) listsReceved,
+    required TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)
+        updated,
+    required TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)
+        error,
   }) {
-    return error(message, todos);
+    return error(message, todoLists, todos);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ToDo> todos)? updated,
-    TResult Function(String? message, List<ToDo>? todos)? error,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
   }) {
-    return error?.call(message, todos);
+    return error?.call(message, todoLists, todos);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ToDo> todos)? updated,
-    TResult Function(String? message, List<ToDo>? todos)? error,
+    TResult Function(List<ToDoList> todoLists)? listsReceved,
+    TResult Function(List<ToDoList>? todoLists, List<ToDo> todos)? updated,
+    TResult Function(
+            String? message, List<ToDoList>? todoLists, List<ToDo>? todos)?
+        error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message, todos);
+      return error(message, todoLists, todos);
     }
     return orElse();
   }
@@ -454,6 +685,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ListsReceved value) listsReceved,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) {
@@ -464,6 +696,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
     TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) {
@@ -474,6 +707,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ListsReceved value)? listsReceved,
     TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -486,9 +720,11 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements ToDoState {
-  const factory _Error(String? message, [List<ToDo>? todos]) = _$_Error;
+  const factory _Error(String? message,
+      [List<ToDoList>? todoLists, List<ToDo>? todos]) = _$_Error;
 
   String? get message;
+  List<ToDoList>? get todoLists;
   List<ToDo>? get todos;
   @JsonKey(ignore: true)
   _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;

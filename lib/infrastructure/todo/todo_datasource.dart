@@ -1,16 +1,22 @@
 import 'package:supabase/supabase.dart';
+import 'package:supabase_todo/domain/todo/todo_list.dart';
 import 'package:supabase_todo/infrastructure/todo/todo_exception.dart';
 
 abstract class ToDoDataSource {
+  /// Get all todo lists
+  ///
+  /// Throws a [ToDoException] for all error codes.
+  Future<List<ToDoList>> getToDoLists();
+
   /// Open a ToDo events stream
   ///
   /// Throws a [ToDoException] for all error codes.
-  Stream<List<Map<String, dynamic>>> openToDoStream();
+  Stream<List<Map<String, dynamic>>> openToDoStream(int toDoListId);
 
   /// Add a new todo
   ///
   /// Throws a [ToDoException] for all error codes.
-  Future<bool> addTodo(String title);
+  Future<bool> addTodo(int todoListId, String title);
 
   /// Complete a todo item
   ///
@@ -24,18 +30,33 @@ class ToDoDataSourceImpl implements ToDoDataSource {
   ToDoDataSourceImpl(
     this._client,
   );
+  @override
+  Future<List<ToDoList>> getToDoLists() async {
+    final response = await _client.from('todo_lists').select('*').execute();
+    if (response.hasError) {
+      throw ToDoException.unexpected(
+        response.error!.message,
+      );
+    } else {
+      return (response.data as List<dynamic>)
+          .map((json) => ToDoList.fromJson(json as Map<String, dynamic>))
+          .toList();
+    }
+  }
 
   @override
-  Stream<List<Map<String, dynamic>>> openToDoStream() => _client
-      .from('todos')
+  Stream<List<Map<String, dynamic>>> openToDoStream(int toDoListId) => _client
+      .from('todos:todo_list_id=eq.$toDoListId')
       .stream(['todo_id'])
       .order('todo_created_at', ascending: true)
       .execute();
 
   @override
-  Future<bool> addTodo(String title) async {
-    final response =
-        await _client.from('todos').insert({'todo_title': title}).execute();
+  Future<bool> addTodo(int todoListId, String title) async {
+    final response = await _client.from('todos').insert({
+      'todo_title': title,
+      'todo_list_id': todoListId,
+    }).execute();
     if (response.hasError) {
       throw ToDoException.unexpected(
         response.error!.message,
