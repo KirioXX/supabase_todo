@@ -20,7 +20,7 @@ class ListPage extends StatefulWidget {
   State<ListPage> createState() => _ListPageState();
 }
 
-class _ListPageState extends State<ListPage> {
+class _ListPageState extends AuthRequiredState<ListPage> {
   String currentTodo = "";
 
   @override
@@ -52,61 +52,61 @@ class _ListPageState extends State<ListPage> {
                   child: CircularProgressIndicator(),
                 ),
               ),
-              updated: (s) => Expanded(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: TextField(
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: 'Title',
-                                ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    currentTodo = value;
-                                  });
-                                },
+              updated: (s) => Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 10),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: TextField(
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Title',
                               ),
+                              onChanged: (value) {
+                                setState(() {
+                                  currentTodo = value;
+                                });
+                              },
                             ),
                           ),
-                          ElevatedButton(
-                              onPressed: () {
-                                if (currentTodo.trim() != '') {
-                                  context
-                                      .read<ToDoCubit>()
-                                      .addToDo(args.todoList.id, currentTodo);
-                                  setState(() {
-                                    currentTodo = '';
-                                  });
-                                }
-                              },
-                              child: const Text('Add Todo'))
-                        ],
-                      ),
+                        ),
+                        ElevatedButton(
+                            onPressed: () async {
+                              if (currentTodo.trim() != '') {
+                                await context
+                                    .read<ToDoCubit>()
+                                    .addToDo(args.todoList.id, currentTodo);
+                                setState(() {
+                                  currentTodo = '';
+                                });
+                              }
+                            },
+                            child: const Text('Add Todo'))
+                      ],
                     ),
-                    Column(
-                      children: s.todos
-                          .map((t) => SelectCard(
-                                enabled: !t.isDone,
-                                selected: t.isDone,
-                                content: Text(t.name),
-                                onTap: () => t.isDone
-                                    ? null
-                                    : context
-                                        .read<ToDoCubit>()
-                                        .finishToDo(t.id),
-                              ))
-                          .toList(),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: s.todos.map((t) {
+                        return SelectCard(
+                          enabled: !t.isDone,
+                          selected: t.isDone,
+                          content: Text(t.name),
+                          onTap: () => t.isDone
+                              ? null
+                              : context.read<ToDoCubit>().finishToDo(t.id),
+                        );
+                      }).toList(),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               error: (s) => Expanded(
                 child: Column(

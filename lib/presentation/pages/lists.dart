@@ -3,10 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_todo/application/todo/todo_cubit.dart';
 import 'package:supabase_todo/domain/todo/todo_list.dart';
 import 'package:supabase_todo/presentation/pages/list.dart';
+import 'package:supabase_todo/presentation/widgets/index.dart';
 import 'package:supabase_todo/utils/snack_bar.dart';
 
-class ListPickerPage extends StatelessWidget {
-  const ListPickerPage({Key? key}) : super(key: key);
+class ListsPage extends StatefulWidget {
+  const ListsPage({Key? key}) : super(key: key);
+
+  @override
+  State<ListsPage> createState() => _ListsPageState();
+}
+
+class _ListsPageState extends AuthRequiredState<ListsPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ToDoCubit>().getToDoLists();
+  }
 
   @override
   Widget build(BuildContext context) {
